@@ -1,0 +1,12 @@
+***SIMULATION FINISHES***
+***Process Execution***
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 3 3 3 3 3 3 3 3 3 2 2 2 2 2 2 2 2 2 2 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2 2 2 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+***Performance Indicators***
+Total execution cycles: 108
+CPU Utilization: 1.0
+Throughput: 0.037037037037037035
+Average Turnaround Time: 76.75
+Average Waiting Time: 43.0
+Average Context Switches (solo Gantt): 2.0
+Average Context Switches (completo): 2.0
+Average Response Time: 13.5
