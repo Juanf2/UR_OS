@@ -39,7 +39,26 @@ public class RoundRobin extends Scheduler{
    
     @Override
     public void getNext(boolean cpuEmpty) {
-        //Insert code here
+        if (cpuEmpty && !processes.isEmpty()) {// Case 1 → Empty CPU → load next process
+            Process next = processes.poll();
+            os.interrupt(InterruptType.SCHEDULER_RQ_TO_CPU, next);
+            resetCounter();  // reset quantum
+            return;
+        }
+        if (!cpuEmpty) {// Case 2 → CPU ocupied → count time
+            cont++;
+            
+            if (cont >= q) {// Quantum expired
+                Process current = os.getProcessInCPU();
+                
+                if (current != null) {
+                    current.increaseContextSwitches();
+                    os.interrupt(InterruptType.SCHEDULER_CPU_TO_RQ, null);// PREEMPT → CPU → ReadyQueue
+                    addContextSwitch();
+                }
+                resetCounter();
+            }
+        }
     }
     
     
