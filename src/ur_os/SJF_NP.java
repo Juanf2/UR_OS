@@ -38,9 +38,17 @@ public class SJF_NP extends Scheduler{
     }
     
     @Override
-    public void newProcess(boolean cpuEmpty) {} //Non-preemtive
-
+    public void newProcess(boolean cpuEmpty) {
+        if (cpuEmpty) {
+            getNext(true);
+        }
+    }
+    
     @Override
-    public void IOReturningProcess(boolean cpuEmpty) {} //Non-preemtive
+    public void IOReturningProcess(boolean cpuEmpty) {
+        if (cpuEmpty) {
+            getNext(true);
+        }
+    }
     
 }
