@@ -474,45 +474,90 @@ public final class SystemOS implements Runnable{
     }
     
     public double calcCPUUtilization() {
-        
-        return 0; // Mantiene el cálculo correcto
+        int busy = 0;
+        for (Integer pid : execution) {
+            if (pid != -1) {   // -1 = CPU idle
+                busy++;
+            }
+        }
+        return (double) busy / execution.size();
     }
     
     public double calcTurnaroundTime() {
-        
-    
-        return 0;
+        double total = 0;
+        int finished = 0;
+        for (Process p : processes) {
+            if (p.getState() == ProcessState.FINISHED) {
+                finished++;
+                total += (p.getTime_finished() - p.getTime_init());
+            }
+        }
+        return finished == 0 ? 0 : total / finished;
     }
     
     public double calcThroughput() {
-        if (processes.isEmpty()) return 0;
-    
-        return 0; // Procesos terminados por unidad de tiempo
+        int finished = 0;
+        for (Process p : processes) {
+            if (p.getState() == ProcessState.FINISHED) {
+                finished++;
+            }
+        }
+        return (double) finished / clock;
     }
     
     public double calcAvgWaitingTime() {
-           
-        return 0;
+        double total = 0;
+        int finished = 0;
+        for (Process p : processes) {
+            if (p.getState() == ProcessState.FINISHED) {
+                finished++;
+                int turnaround = p.getTime_finished() - p.getTime_init();
+                int waiting = turnaround - p.getTotalExecutionTime();
+                total += waiting;
+            }
+        }
+        return finished == 0 ? 0 : total / finished;
     }
     
     //Everytime a process is taken out from memory, when a interruption occurs
     public double calcAvgContextSwitches() {
-        
-        return 0;
+        double total = 0;
+        int finished = 0;
+        for (Process p : processes) {
+            if (p.getState() == ProcessState.FINISHED) {
+                finished++;
+                total += p.getContextSwitches();
+            }
+        }
+        return finished == 0 ? 0 : total / finished;
     }
-    
+   
     
     //Just context switches based on the execution timeline
     public double calcAvgContextSwitches2() {
+        double total = 0;
+        int finished = 0;
         
-        return 0;
+        for (Process p : processes) {
+            if (p.getState() == ProcessState.FINISHED) {
+                finished++;
+                total += p.getContextSwitches();
+            }
+        }
+        return finished == 0 ? 0 : total / finished;
     }
     
     
     public double calcResponseTime() {
-        
-        return 0;
-
+        double total = 0;
+        int finished = 0;
+        for (Process p : processes) {
+            if (p.getState() == ProcessState.FINISHED) {
+                finished++;
+                total += p.getResponseTime();
+            }
+        }
+        return finished == 0 ? 0 : total / finished;
     }
     public void compareFiles(String filePath1, String filePath2) {
         try (BufferedReader reader1 = new BufferedReader(new FileReader(filePath1));
