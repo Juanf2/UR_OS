@@ -3,10 +3,10 @@
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2 3 3 3 3 3 3 3 3 3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2 2 2 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
 ***Performance Indicators***
 Total execution cycles: 108
-CPU Utilization: 0.0
-Throughput: 0.0
-Average Turnaround Time: 0.0
-Average Waiting Time: 0.0
+CPU Utilization: 1.0
+Throughput: 0.037037037037037035
+Average Turnaround Time: 81.25
+Average Waiting Time: 47.5
 Average Context Switches (solo Gantt): 0.0
 Average Context Switches (completo): 0.0
-Average Response Time: 0.0
+Average Response Time: 14.75

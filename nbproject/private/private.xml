@@ -1,13 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="1">
+        <file>
+            <url>src/ur_os/TieBreakerType.java</url>
+            <bookmark id="1">
+                <name/>
+                <line>10</line>
+                <key/>
+            </bookmark>
+        </file>
+    </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/avane/Downloads/ur_os_pp_public-main/ur_os_pp_public-main/src/ur_os/RoundRobin.java</file>
-            <file>file:/C:/Users/avane/Downloads/ur_os_pp_public-main/ur_os_pp_public-main/src/ur_os/SJF_P.java</file>
-            <file>file:/C:/Users/avane/Downloads/ur_os_pp_public-main/ur_os_pp_public-main/src/ur_os/SJF_NP.java</file>
-            <file>file:/C:/Users/avane/Downloads/ur_os_pp_public-main/ur_os_pp_public-main/src/ur_os/Process.java</file>
-            <file>file:/C:/Users/avane/Downloads/ur_os_pp_public-main/ur_os_pp_public-main/src/ur_os/OS.java</file>
+            <file>file:/C:/Users/juanp/Documents/GitHub/UR_OS/SJF_NP.txt</file>
+            <file>file:/C:/Users/juanp/Documents/GitHub/UR_OS/src/ur_os/SJF_P.java</file>
+            <file>file:/C:/Users/juanp/Documents/GitHub/UR_OS/src/ur_os/SJF_NP.java</file>
+            <file>file:/C:/Users/juanp/Documents/GitHub/UR_OS/src/ur_os/SystemOS.java</file>
+            <file>file:/C:/Users/juanp/Documents/GitHub/UR_OS/src/ur_os/MFQ.java</file>
+            <file>file:/C:/Users/juanp/Documents/GitHub/UR_OS/src/ur_os/UR_OS.java</file>
         </group>
     </open-files>
 </project-private>

@@ -34,21 +34,56 @@ public class MFQ extends Scheduler{
         
     @Override
     public void addProcess(Process p){
-       // New processes enter highest priority queue (Q0)
-        if (!schedulers.isEmpty()) {
+
+        System.out.println(p.getState());
+        System.out.println("p sch: " + p.currentScheduler);
+        System.out.println("current sch: " + currentScheduler);
+
+        if (p.getState() == ProcessState.NEW){
+
+            System.out.println("in new");
+            System.out.println("Pid: " + p.getPid());
+
+            p.currentScheduler = 0;
             schedulers.get(0).addProcess(p);
+            this.currentScheduler = 0;
         }
+
+        else if (p.getState() == ProcessState.CPU){
+
+            System.out.println("in CPU");
+            System.out.println("Pid: " + p.getPid());
+
+            if (p.currentScheduler < schedulers.size() - 1){
+                schedulers.get(p.currentScheduler + 1).addProcess(p);
+                p.currentScheduler++;
+            }
+        }
+
+        else if (p.getState() == ProcessState.IO){
+
+            System.out.println("in IO");
+            System.out.println("Pid: " + p.getPid());
+
+            p.currentScheduler = 0;
+
+            if (!(p.currentScheduler > this.currentScheduler)) {
+                this.currentScheduler = p.currentScheduler;
+            }
+
+            schedulers.get(p.currentScheduler).addProcess(p);
+        }
+
+        defineCurrentScheduler();
     }
     
     void defineCurrentScheduler() {
-        //This methos is siggested to help you find the scheduler that should be the next in line to provide processes... perhaps the one with process in the queue?
         
-        // Find the first scheduler that has processes
         for (int i = 0; i < schedulers.size(); i++) {
 
             Scheduler s = schedulers.get(i);
 
-            if (!s.isEmpty()) {   // assuming Scheduler has isEmpty()
+            if (!s.isEmpty()) {  
                 currentScheduler = i;
                 return;
             }
@@ -60,10 +95,7 @@ public class MFQ extends Scheduler{
    
     @Override
     public void getNext(boolean cpuEmpty) {
-        /*Suggestion: now that you know on which scheduler a process is, you need to keep advancing that scheduler.
-        If it a preemptive one, you need to notice the changes
-        */
-        //that it may have caused and verify if the change is coherent with the priority policy for the queues.
+        
         defineCurrentScheduler();
 
         if (currentScheduler == -1)
@@ -71,28 +103,30 @@ public class MFQ extends Scheduler{
 
         Scheduler s = schedulers.get(currentScheduler);
 
-        // Delegate scheduling to the selected queue
         s.getNext(cpuEmpty);
-  
     }
     
     @Override
     public void newProcess(boolean cpuEmpty) { //Non-preemtive in this event
 
-        // New process goes to highest priority queue
-        defineCurrentScheduler();
+        Process p = os.getProcessInCPU();
 
-        if (currentScheduler != -1) {
-            schedulers.get(0).newProcess(cpuEmpty);
-        }
+        p.currentScheduler = 0;
+
+        schedulers.get(0).addProcess(p);
+
+        currentScheduler = 0;
     }
     
     @Override
     public void IOReturningProcess(boolean cpuEmpty) { //Non-preemtive in this event
     
-        // When a process returns from I/O, place it again in highest queue
-        if (!schedulers.isEmpty()) {
-            schedulers.get(0).IOReturningProcess(cpuEmpty);
-        }
+        Process p = os.getProcessInCPU();
+
+        p.currentScheduler = 0;
+
+        schedulers.get(0).addProcess(p);
+
+        currentScheduler = 0;
     }
 }
