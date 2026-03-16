@@ -248,11 +248,11 @@ public final class SystemOS implements Runnable{
         
         Process p = new Process(false);
         p.setPriority(0);
-        ProcessBurst temp = new ProcessBurst(6,ProcessBurstType.CPU);    
+        ProcessBurst temp = new ProcessBurst(9,ProcessBurstType.CPU);    
         p.addBurst(temp);
-        temp = new ProcessBurst(2,ProcessBurstType.IO);    
+        temp = new ProcessBurst(4,ProcessBurstType.IO);    
         p.addBurst(temp);
-        temp = new ProcessBurst(4,ProcessBurstType.CPU);    
+        temp = new ProcessBurst(9,ProcessBurstType.CPU);    
         p.addBurst(temp);
         p.setTime_init(0);
         processes.add(p);
@@ -260,35 +260,35 @@ public final class SystemOS implements Runnable{
         
         p = new Process(false);
         p.setPriority(1);
-        temp = new ProcessBurst(2,ProcessBurstType.CPU);    
+        temp = new ProcessBurst(10,ProcessBurstType.CPU);    
         p.addBurst(temp);
-        temp = new ProcessBurst(5,ProcessBurstType.IO);    
+        temp = new ProcessBurst(2,ProcessBurstType.IO);    
         p.addBurst(temp);
-        temp = new ProcessBurst(5,ProcessBurstType.CPU);    
+        temp = new ProcessBurst(12,ProcessBurstType.CPU);    
         p.addBurst(temp);
-        p.setTime_init(3);
+        p.setTime_init(4);
         processes.add(p);
         
         p = new Process(false);
         p.setPriority(2);
-        temp = new ProcessBurst(3,ProcessBurstType.CPU);    
+        temp = new ProcessBurst(7,ProcessBurstType.CPU);    
         p.addBurst(temp);
-        temp = new ProcessBurst(1,ProcessBurstType.IO);    
+        temp = new ProcessBurst(4,ProcessBurstType.IO);    
         p.addBurst(temp);
-        temp = new ProcessBurst(6,ProcessBurstType.CPU);    
+        temp = new ProcessBurst(13,ProcessBurstType.CPU);    
         p.addBurst(temp);
-        p.setTime_init(5);
+        p.setTime_init(7);
         processes.add(p);
         
         p = new Process(false);
         p.setPriority(3);
-        temp = new ProcessBurst(4,ProcessBurstType.CPU);    
+        temp = new ProcessBurst(11,ProcessBurstType.CPU);    
         p.addBurst(temp);
-        temp = new ProcessBurst(4,ProcessBurstType.IO);    
+        temp = new ProcessBurst(8,ProcessBurstType.IO);    
         p.addBurst(temp);
-        temp = new ProcessBurst(7,ProcessBurstType.CPU);    
+        temp = new ProcessBurst(8,ProcessBurstType.CPU);    
         p.addBurst(temp);
-        p.setTime_init(8);
+        p.setTime_init(11);
         processes.add(p);
         
         clock = 0;
