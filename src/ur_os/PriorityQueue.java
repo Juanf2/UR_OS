@@ -13,9 +13,8 @@ public class PriorityQueue extends Scheduler {
     int currentScheduler;
     private ArrayList<Scheduler> schedulers;
  
-    // Quantum management owned by PriorityQueue
-    private int quantumCont;    // how many cycles the current process has run
-    private int currentQuantum; // the quantum of the current sub-scheduler
+    private int quantumCont;    
+    private int currentQuantum; 
  
     PriorityQueue(OS os) {
         super(os);
@@ -39,18 +38,17 @@ public class PriorityQueue extends Scheduler {
         if (priority < 0) priority = 0;
         if (priority >= schedulers.size()) priority = schedulers.size() - 1;
  
-        // Trigger preemption logic BEFORE marking READY (state still NEW or IO)
+        
         if (p.getState() == ProcessState.NEW) {
             newProcess(os.isCPUEmpty());
         } else if (p.getState() == ProcessState.IO) {
             IOReturningProcess(os.isCPUEmpty());
         }
  
-        // Mark READY and insert into the correct priority sub-queue
+        
         p.setState(ProcessState.READY);
         schedulers.get(priority).processes.add(p);
  
-        // Recalculate which scheduler is now active
         defineCurrentScheduler();
     }
  
@@ -94,7 +92,7 @@ public class PriorityQueue extends Scheduler {
  
             int runningPriority = running.getPriority();
  
-            // Find the highest-priority non-empty queue
+            
             int bestWaiting = -1;
             for (int i = 0; i < schedulers.size(); i++) {
                 if (!schedulers.get(i).isEmpty()) {
@@ -104,28 +102,22 @@ public class PriorityQueue extends Scheduler {
             }
  
             if (bestWaiting != -1 && bestWaiting < runningPriority) {
-                // Higher-priority process is waiting — preempt immediately
                 running.increaseContextSwitches();
                 addContextSwitch();
                 quantumCont = 0;
                 os.interrupt(InterruptType.SCHEDULER_CPU_TO_RQ, null);
-                // addProcess() re-routes the evicted process to its priority queue
                 loadNext();
  
             } else {
-                // No higher-priority contender — tick the quantum counter
                 quantumCont++;
  
                 if (quantumCont >= currentQuantum) {
-                    // Quantum expired — preempt and load next
                     running.increaseContextSwitches();
                     addContextSwitch();
                     quantumCont = 0;
                     os.interrupt(InterruptType.SCHEDULER_CPU_TO_RQ, null);
-                    // addProcess() re-routes the evicted process to its priority queue
                     loadNext();
                 }
-                // If quantum not yet expired, do nothing — process keeps running
             }
         }
     }
